@@ -3,6 +3,7 @@ package com.Project.springbootdemo;
 
 import java.util.ArrayList;
 
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -54,7 +55,14 @@ public class StudentDAO  {
 	}
 	
 	
-	// print all users
-	public ArrayList<Students> printAll() {
-		return StudentsData;}
+	public Object printAll() {
+		System.out.println("Print all users : \n");
+		for (int i = 0; i < StudentsData.size(); i++) {
+			System.out.println("No." + (i + 1) + " user: ");
+			printUserInfo(StudentsData.get(i));
+			System.out.println("********");
+		}
+		System.out.println();
+		return null;
+	}
 }

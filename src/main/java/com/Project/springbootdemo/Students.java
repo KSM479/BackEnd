@@ -2,20 +2,13 @@ package com.Project.springbootdemo;
 
 import java.util.regex.Pattern;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-@Entity
+
 public class Students {
 	
 	
-	@Size(min=1)
+	
 	private String FirstName;
-	@Size(min=1, message="Lastname should have more than one character")
+	
 	private String LastName;
 	private int Month;
 	private int Day;
@@ -161,9 +154,6 @@ public class Students {
 			System.out.println("Enter a valid gender");
 		}
 	}
-	@Override
-	public String toString() {
-		return "User [emailID=" + Email + ", name=" + FirstName + ", lastname=" + LastName + "]";
-	}
+	
 	}
 	
