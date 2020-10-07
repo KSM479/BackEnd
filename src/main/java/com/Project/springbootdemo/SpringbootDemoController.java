@@ -1,16 +1,16 @@
 package com.Project.springbootdemo;
 
 
+import java.util.List;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -21,27 +21,25 @@ public class SpringbootDemoController {
 //	private JAVAStudentDAO studentDAO = new JAVAStudentDAO() ;
 	
 	@Autowired
-	private StudentDAO studentService;
+	private StudentRepo studentRepo;
 	
 	//Get all Students from the Arraylist
-	@GetMapping(path="getAllStudents")
-	public  ArrayList<Students> getAllStudents(){
-		 return studentService.displayStudents();		
+	@GetMapping(path="/jpa/getAllStudents")
+	public List<Students> getAllStudents(){
+		return studentRepo.findAll();		
 	}
 	
 	//Adding a new student into the classroom
-	@PostMapping(path="/addStudent")
-	@ResponseStatus(HttpStatus.OK)
-	public  void addStudent(Students newStudent){
-		studentService.addUser(newStudent);
+	@PostMapping(path="/jpa/addNewStudent")
+	public ResponseEntity addNewStudent(@Valid @RequestBody Students newStudent){
+		studentRepo.save(newStudent);
 		
+		return new ResponseEntity<>("Created new student",HttpStatus.CREATED);
 	}
-	@PostMapping(path="/deleteStudent/{email}")
-	@ResponseStatus(HttpStatus.OK)
-	public  void deleteStudent(String email){
-		studentService.deleteUser(email);
+	@PostMapping(path="/jpa/deleteNewStudent")
+	public ResponseEntity deleteNewStudent(@Valid @RequestBody Students newStudent){
+		studentRepo.delete(newStudent);
 		
+		return new ResponseEntity<>("Created new student",HttpStatus.CREATED);
 	}
-	
-	
 }
