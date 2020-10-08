@@ -41,15 +41,17 @@ public class SpringbootDemoController {
 		return new ResponseEntity<>("Created new student",HttpStatus.CREATED);
 	}
 	@DeleteMapping(path="/jpa/deleteNewStudent/{id}")
-	public ResponseEntity deleteNewStudent(@PathVariable Long id){
+	public ResponseEntity deleteNewStudent(@PathVariable Long id ){
 		studentRepo.deleteById(id);
 		
 		return new ResponseEntity<>("Deleted User",HttpStatus.CREATED);
 	}
 	@PutMapping(path="/jpa/updatePassword/{id}")
-	public ResponseEntity changePassword(String newPassword, @PathVariable Long id) {
-		Optional<Students> user = studentRepo.findById(id);
-		user.get().setPassword(newPassword);
-		return new ResponseEntity<>("Password updated",HttpStatus.CREATED);
+	public java.util.Optional<Object> changePassword(@RequestBody Students newStudent, @PathVariable Long id) {
+    return studentRepo.findById(id)
+    	      .map(user -> {
+    	        user.setPassword(newStudent.getPassword());
+    	        return new ResponseEntity<>("Passsword updated successfully",HttpStatus.CREATED);
+    	      });
 	}
 }

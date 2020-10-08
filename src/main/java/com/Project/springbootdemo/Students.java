@@ -22,7 +22,7 @@ public class Students {
 	@JsonIgnore  //filter this in response
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int studentID;
+	private Long studentID;
 	
 	@Size(min=1)
 	private String name;
@@ -64,6 +64,10 @@ public class Students {
 	public String getGender() {
 		return Gender;
 	}
+	
+	public String getPassword() {
+		return Password;
+	}
 	public int getYear() {
 		return Year;
 	}
@@ -74,7 +78,7 @@ public class Students {
 	public int getMonth() {
 		return Month;
 	}
-	public int getStuendtID() {
+	public Long getStuendtID() {
 		return studentID;
 	}
 	public void setGender(String gender) {
@@ -109,7 +113,7 @@ public class Students {
 		}
 	}
 
-	public void setStuendtID(int stuendtID) {
+	public void setStuendtID(Long stuendtID) {
 		this.studentID = stuendtID;
 	}
 	public String getName() {
